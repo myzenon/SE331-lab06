@@ -3,11 +3,13 @@ package camt.cbsd.controller;
 import camt.cbsd.entity.Student;
 import camt.cbsd.services.StudentService;
 import camt.cbsd.services.StudentServiceImpl;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,5 +30,18 @@ public class StudentController {
 
         List<Student> students = studentService.getStudents();
         return Response.ok(students).build();
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getStudent(@PathParam("id") long id) {
+        Student student = studentService.findById(id);
+        if(student != null) {
+            return Response.ok(student).build();
+        }
+        else {
+            return  Response.status(Response.Status.NO_CONTENT).build();
+        }
     }
 }

@@ -1,13 +1,13 @@
-package camt.cbsd.services;
+package camt.cbsd.dao;
 
 import camt.cbsd.entity.Student;
 
 import java.util.List;
 
 /**
- * Created by Dto on 3/11/2017.
+ * Created by CAMT on 3/24/2017.
  */
-public interface StudentService {
+public interface StudentDao {
     List<Student> getStudents();
     Student findById(long id);
 }
